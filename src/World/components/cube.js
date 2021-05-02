@@ -2,7 +2,7 @@ import {
   BoxBufferGeometry,
   MathUtils,
   Mesh,
-  MeshStandardMaterial,
+  MeshPhongMaterial,
   TextureLoader,
 } from "three";
 
@@ -17,7 +17,7 @@ function createMaterial() {
 
   // create a "standard" material using
   // the texture we just loaded as a color map
-  const material = new MeshStandardMaterial({
+  const material = new MeshPhongMaterial({
     map: texture,
   });
 

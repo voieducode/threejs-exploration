@@ -1,6 +1,7 @@
 import { Loop } from "./systems/Loop.js";
 import { Resizer } from "./systems/Resizer.js";
 import { createCamera } from "./components/camera.js";
+import { createControls } from "./systems/controls";
 import { createCube } from "./components/cube.js";
 import { createLights } from "./components/lights.js";
 import { createRenderer } from "./systems/renderer.js";
@@ -19,10 +20,15 @@ class World {
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
+    const controls = createControls(camera, renderer.domElement);
+
     const cube = createCube();
     const light = createLights();
 
-    loop.updatables.push(cube);
+    // disabled mesh rotation
+    // loop.updatables.push(cube);
+    loop.updatables.push(controls);
+    controls.target.copy(cube.position);
 
     scene.add(cube, light);
 
