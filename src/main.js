@@ -9,6 +9,17 @@ function main() {
 
   // start the animation loop
   world.start();
+
+  let started = true;
+  window.addEventListener("click", () => {
+    if (started) {
+      world.stop();
+      started = false;
+    } else {
+      world.start();
+      started = true;
+    }
+  });
 }
 
 main();
