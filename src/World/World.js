@@ -23,14 +23,14 @@ class World {
     const controls = createControls(camera, renderer.domElement);
 
     const cube = createCube();
-    const light = createLights();
+    const { ambientlight, mainLight } = createLights();
 
     // disabled mesh rotation
     // loop.updatables.push(cube);
     loop.updatables.push(controls);
     controls.target.copy(cube.position);
 
-    scene.add(cube, light);
+    scene.add(ambientlight, mainLight, cube);
 
     // eslint-disable-next-line no-unused-vars
     const resizer = new Resizer(container, camera, renderer);
