@@ -23,9 +23,12 @@ class World {
     const light = createLights();
 
     loop.updatables.push(cube);
+    loop.updatables.push(camera);
+    loop.updatables.push(light);
 
     scene.add(cube, light);
 
+    // eslint-disable-next-line no-unused-vars
     const resizer = new Resizer(container, camera, renderer);
   }
 

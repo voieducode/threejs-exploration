@@ -7,6 +7,10 @@ function createLights() {
   // move the light right, up, and towards us
   light.position.set(10, 10, 10);
 
+  light.tick = () => {
+    light.position.x += 0.2;
+  };
+
   return light;
 }
 

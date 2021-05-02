@@ -11,6 +11,10 @@ function createCamera() {
   // move the camera back so we can view the scene
   camera.position.set(0, 0, 10);
 
+  camera.tick = () => {
+    camera.position.z += 1.0 / 60.0;
+  };
+
   return camera;
 }
 
