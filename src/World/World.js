@@ -1,10 +1,9 @@
-import { createCamera } from './components/camera.js';
-import { createCube } from './components/cube.js';
-import { createLights } from './components/lights.js';
-import { createScene } from './components/scene.js';
-
-import { createRenderer } from './systems/renderer.js';
-import { Resizer } from './systems/Resizer.js';
+import { Resizer } from "./systems/Resizer.js";
+import { createCamera } from "./components/camera.js";
+import { createCube } from "./components/cube.js";
+import { createLights } from "./components/lights.js";
+import { createRenderer } from "./systems/renderer.js";
+import { createScene } from "./components/scene.js";
 
 let scene;
 let camera;
@@ -23,6 +22,9 @@ class World {
     scene.add(cube, light);
 
     const resizer = new Resizer(container, camera, renderer);
+    resizer.onResize = () => {
+      this.render();
+    };
   }
 
   render() {
