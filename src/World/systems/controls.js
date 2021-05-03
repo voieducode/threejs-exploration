@@ -8,6 +8,7 @@ function createControls(camera, canvas) {
   controls.tick = () => {
     controls.update();
   };
+
   return controls;
 }
 
