@@ -2,8 +2,8 @@ import { Loop } from "./systems/Loop.js";
 import { Resizer } from "./systems/Resizer.js";
 import { createCamera } from "./components/camera.js";
 import { createControls } from "./systems/controls";
-import { createCube } from "./components/cube.js";
 import { createLights } from "./components/lights.js";
+import { createMeshGroup } from "./components/meshGroup.js";
 import { createRenderer } from "./systems/renderer.js";
 import { createScene } from "./components/scene.js";
 
@@ -20,17 +20,16 @@ class World {
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
-    const controls = createControls(camera, renderer.domElement);
-
-    const cube = createCube();
+    const meshGroup = createMeshGroup();
     const { ambientlight, mainLight } = createLights();
 
-    // disabled mesh rotation
-    // loop.updatables.push(cube);
-    loop.updatables.push(controls);
-    controls.target.copy(cube.position);
+    loop.updatables.push(meshGroup);
 
-    scene.add(ambientlight, mainLight, cube);
+    // const controls = createControls(camera, renderer.domElement);
+    // loop.updatables.push(controls);
+    // controls.target.copy(cube.position);
+
+    scene.add(ambientlight, mainLight, meshGroup);
 
     // eslint-disable-next-line no-unused-vars
     const resizer = new Resizer(container, camera, renderer);
