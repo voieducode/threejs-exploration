@@ -1,9 +1,11 @@
+import { createAxesHelper, createGridHelper } from "./components/helpers.js";
+
 import { Loop } from "./systems/Loop.js";
 import { Resizer } from "./systems/Resizer.js";
+import { Train } from "./components/Train/Train.js";
 import { createCamera } from "./components/camera.js";
 import { createControls } from "./systems/controls";
 import { createLights } from "./components/lights.js";
-import { createMeshGroup } from "./components/meshGroup.js";
 import { createRenderer } from "./systems/renderer.js";
 import { createScene } from "./components/scene.js";
 
@@ -20,19 +22,17 @@ class World {
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
-    const meshGroup = createMeshGroup();
+    const controls = createControls(camera, renderer.domElement);
+    const train = new Train();
     const { ambientlight, mainLight } = createLights();
 
-    loop.updatables.push(meshGroup);
-
-    // const controls = createControls(camera, renderer.domElement);
-    // loop.updatables.push(controls);
-    // controls.target.copy(cube.position);
-
-    scene.add(ambientlight, mainLight, meshGroup);
+    loop.updatables.push(controls, train);
+    scene.add(ambientlight, mainLight, train);
 
     // eslint-disable-next-line no-unused-vars
     const resizer = new Resizer(container, camera, renderer);
+
+    scene.add(createAxesHelper(), createGridHelper());
   }
 
   render() {
